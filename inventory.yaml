@@ -1,0 +1,10 @@
+myhosts:
+  hosts:
+    alpha17:
+      ansible_host: 192.168.1.5
+    tarh-work:
+      ansible_host: 192.168.1.6
+virtual:
+  hosts:
+    test:
+      ansible_host: 192.168.2.76
