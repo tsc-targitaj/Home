@@ -1,0 +1,5 @@
+---
+  - name: Устанавливаем необходимые пакеты
+    include_tasks: "{{ ansible_distribution }}/packages.yaml"
+    tags:
+    - packages

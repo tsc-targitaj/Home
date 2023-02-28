@@ -1,0 +1,62 @@
+---
+  - name: Определяем флаги cpu
+    shell: "cpuid2cpuflags | sed -e 's/CPU_FLAGS_X86: //'"
+    register: cpu_flags_out
+    check_mode: no
+    changed_when: false
+
+  - name: Замоминаем флаги cpu
+    set_fact:
+      cpu_flags: "{{ cpu_flags_out.stdout }}"
+
+  - name: Подготавливаем portage
+    include_tasks: prepare_portage.yaml
+
+  - name: Сужествует ли layman.conf?
+    stat:
+      path: /var/lib/layman/make.conf
+    register: r_layman_exists
+
+  - name: Генерируем make.conf
+    template:
+      src: templates/etc/portage/make.conf.j2
+      dest: /etc/portage/make.conf
+      owner: portage
+      group: root
+      mode: 0644
+
+  - name: Принимаем все лицензии
+    copy:
+      content: "*/* *\n"
+      dest: /etc/portage/package.license
+      owner: portage
+
+  - name: Устанавливаем свой репозиторий
+    include_role:
+      name: portage
+      tasks_from: make_ansible_repository
+
+  - name: Устанавливаем внеролевые пакеты
+    include_role:
+      name: portage
+      tasks_from: install_package
+    vars:
+      package: "{{ item }}"
+    loop: "{{ merged_vars.portage.packages }}"
+    tags:
+    - packages
+
+  - name: Настраиваем ротацию логов
+    import_role:
+      name: logrotate
+      tasks_from: rotate
+    vars:
+      lr:
+        name: elog-save-summary
+        files:
+        - /var/log/portage/elog/summary.log
+        options:
+        - su portage portage
+        - missingok
+        - nocreate
+        - compress

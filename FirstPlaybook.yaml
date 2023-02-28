@@ -1,0 +1,53 @@
+- name: My very first play
+  hosts: web
+  tasks:
+    - name: Ping my hosts
+      ansible.builtin.ping:
+    - name: Print message
+      ansible.builtin.debug:
+        msg: Hello there
+
+    - name: Installs postfix
+      apt:
+        pkg:
+        - postfix
+        - postfix-mysql
+        - postfix-pgsql
+        state: present
+#        update_cache: yes
+        install_recommends: yes
+
+    - name: Installs apache web server
+      apt:
+        pkg: apache2
+        state: present
+#        update_cache: yes
+        install_recommends: yes
+
+    - name: Installs nginx web server
+      apt:
+        pkg: nginx-full
+        state: present
+#        update_cache: yes
+        install_recommends: yes
+
+    - name: Installs rspamd
+      apt:
+        pkg: rspamd
+        state: present
+#        update_cache: yes
+        install_recommends: yes
+
+    - name: Installs redis-server
+      apt:
+        pkg: redis-server
+        state: present
+#        update_cache: yes
+        install_recommends: yes
+
+    - name: Installs swaks
+      apt:
+        pkg: swaks
+        state: present
+#        update_cache: yes
+        install_recommends: yes

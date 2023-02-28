@@ -1,0 +1,10 @@
+---
+  - name: reload apache2
+    systemd:
+      name: apache2-daemon
+      state: reloaded
+
+  - name: restart apache2
+    systemd:
+      name: apache2-daemon
+      state: restarted

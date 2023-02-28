@@ -1,0 +1,47 @@
+---
+  portage:
+    packages:
+    - { name: sys-apps/systemd, use: { enabled: [ policykit, resolvconf, cryptsetup ], disabled: [ apparmor, audit ] } }
+    - { name: app-misc/jq, unstable: yes }
+    - { name: app-admin/pydf }
+    - { name: net-dns/bind-tools }
+    - { name: net-analyzer/nmap }
+    - { name: net-misc/whois }
+    - { name: net-analyzer/tcpdump }
+    - { name: net-misc/netkit-telnetd, state: absent }
+    - { name: net-misc/telnet-bsd }
+    - { name: sys-apps/pciutils, use: { enabled: [ dns ] } }
+    - { name: sys-apps/usbutils }
+    - { name: sys-apps/i2c-tools }
+    - { name: www-plugins/google-talkplugin, state: absent }
+    - { name: dev-python/passlib }
+
+  windows:
+    packages:
+      wide:
+      - powershell
+      - chocolatey
+      - sysinternals
+      - 7zip
+      - googlechrome
+      - jre8
+      - vlc
+      - putty
+      - totalcommander
+      - foxitreader
+      - notepadplusplus
+      - steam
+      - gimp
+      - silverlight
+      - cdburnerxp
+      - classic-shell
+      - directx
+      - gpu-z
+      - cpu-z
+      - hwinfo
+      - speedfan
+      # - oldcalc
+      - speedcrunch
+      user:
+      - whatsapp
+      - telegram

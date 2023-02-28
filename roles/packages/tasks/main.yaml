@@ -1,0 +1,8 @@
+---
+  - name: Gentoo
+    include_tasks: gentoo.yaml
+    when: ansible_os_family == 'Gentoo'
+
+  - name: Windows
+    include_tasks: windows.yaml
+    when: ansible_os_family == 'Windows'

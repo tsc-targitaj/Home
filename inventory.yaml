@@ -1,10 +1,23 @@
 myhosts:
   hosts:
     alpha17:
-      ansible_host: 192.168.1.5
+      ansible_host: alpha17
     tarh-work:
-      ansible_host: 192.168.1.6
+      ansible_host: tarh-work
+
 virtual:
   hosts:
     test:
-      ansible_host: 192.168.2.76
+      ansible_host: test
+
+web:
+  hosts:
+    test:
+      ansible_host: test
+      ansible_ssh_user: root
+
+tests:
+  hosts:
+    test:
+      ansible_host: test
+      ansible_ssh_user: root
